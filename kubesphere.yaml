@@ -1,0 +1,103 @@
+authentication:
+  # 登录失败次数限制
+  authenticateRateLimiterMaxTries: 10  # 最多允许错误登录10次
+  # 登录失败后封禁时间
+  authenticateRateLimiterDuration: 10m0s  # 10分钟
+  # 登录历史保留时间
+  loginHistoryRetentionPeriod: 168h  # 登录历史保留7天
+  # 是否允许多端同时登录
+  multipleLogin: true
+
+  issuer:
+    # JWT 签发地址（即控制台访问的URL）
+    url: "https://kubesphere.local"
+    # JWT 密钥（必须配置，否则启动报错）
+    jwtSecret: "p0eW04yVQ9Yerl6zGn79HKGX6QIfChGA"
+    # 最大时间偏差（用于容忍服务器时间差）
+    maximumClockSkew: 10s
+    # 访问令牌有效期（Access Token 过期时间）
+    accessTokenMaxAge: 1h
+    # 令牌空闲超时时间（若此时间内未使用则过期）
+    accessTokenInactivityTimeout: 30m
+
+#s3:
+#  # 对象存储配置（用于日志、镜像仓库、文件上传等）
+#  endpoint: "s3.amazonaws.com"
+#  region: "us-east-1"
+#  disableSSL: false
+#  forcePathStyle: false
+#  accessKeyID: "admin"        # S3访问Key
+#  secretAccessKey: "admin"    # S3访问密钥
+#  bucket: "uploads"           # 默认桶名
+
+multicluster:
+  # 当前集群角色，可为 host 或 member
+  clusterRole: "host"
+  # 若为member模式，则需指定host集群名
+  hostClusterName: "kubesphere-host"
+
+kubeconfig:
+  # 鉴权模式：可选 client-certificate / service-account-token / oidc-token / webhook-token
+  authMode: "client-certificate"
+
+terminal:
+  kubectl:
+    image: "kubesphere/kubectl:v1.27.1"   # kubectl 容器镜像
+  node:
+    image: "kubesphere/shell:v1.0.0"      # 节点Shell访问镜像
+  uploadFileLimit: 100Mi                  # 文件上传大小上限
+
+helmExecutor:
+  # Helm 执行器相关配置
+  image: "kubesphere/helm-executor:v3.12.0"
+  timeout: 600s                # Helm Job超时时间
+  historyMax: 10               # Helm历史版本保留数
+  jobTTLAfterFinished: 1800s   # Job完成后清理时间（秒）
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  affinity: {}  # 可以定义Job调度约束，例如节点选择策略
+
+extension:
+  # 插件扩展配置
+  imageRegistry: ""  # 插件默认镜像仓库（留空则使用系统默认）
+  nodeSelector: {}   # 若插件Pod需运行在特定节点上可指定
+  ingress:
+    ingressClassName: "nginx"
+    domainSuffix: "example.com"
+    httpPort: 80
+    httpsPort: 443
+
+experimental:
+  # 验证策略，可选："" / Ignore / Strict / Warn
+  validationDirective: "Warn"  # 设置为Warn表示不影响运行，仅输出警告
+
+composedApp:
+  # 组合应用匹配规则（KubeSphere App Store用）
+  appSelector: "app.kubernetes.io/managed-by=kubesphere"
+
+kubesphere:
+  # 是否开启内部组件的TLS加密
+  tls: true
+
+# 高可用缓存配置（仅host集群启用HA时生效）
+#cache:
+#  type: redis
+#  options:
+#    host: redis.kubesphere-system.svc
+#    port: 6379
+#    password: "KUBESPHERE_CACHE_OPTIONS_PASSWORD"  # 建议改为真实密码
+#    db: 0
+
+auditing:
+  # 审计日志相关配置
+  enabled: false                # 是否启用审计功能
+  retentionPeriod: 168h        # 日志保留时间7天
+  maxEventAge: 24h             # 单条事件最长保留时间
+  webhook:
+    enabled: false             # 是否启用webhook推送
+    url: ""                    # 若开启，填写接收端地址

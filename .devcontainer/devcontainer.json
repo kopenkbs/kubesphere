@@ -6,13 +6,17 @@
   "image": "mcr.microsoft.com/devcontainers/go:1-1.23-bookworm",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "go version",
+  "postCreateCommand": "go version && node --version && npm install -g @qwen-code/qwen-code@latest",
 
   // Configure tool-specific properties.
   "customizations" : {

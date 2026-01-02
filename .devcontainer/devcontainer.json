@@ -10,7 +10,9 @@
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
     },
-    "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {}
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "1.23"
+    }
   },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -22,7 +24,8 @@
   // Configure tool-specific properties.
   "customizations" : {
     "jetbrains" : {
-      "backend" : "GoLand"
+      "backend" : "GoLand",
+      "version" : "2025.3"
     }
   },
 

@@ -7,12 +7,17 @@
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "dockerDashComposeVersion": "v2",
+      "installDockerBuildx": true
+    },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
     },
     "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
       "version" : "1.23",
-      "helm" : "3.8.2",
+      "helm" : "3.15.4",
       "minikube" : "1.25.2"
     }
   },
@@ -21,7 +26,7 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "go version && node --version && npm install -g @qwen-code/qwen-code@latest",
+  //"postCreateCommand": "go version && node --version && npm install -g @qwen-code/qwen-code@latest",
 
   // Configure tool-specific properties.
   "customizations" : {

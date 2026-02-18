@@ -1,0 +1,15 @@
+authentication:
+  jwtSecret: "development-jwt-secret"
+  multipleLogin: true
+  oauthOptions:
+    clients:
+      - name: kubesphere
+        secret: kubesphere
+        redirectURIs:
+          - "*"
+
+kubernetes:
+  kubeconfig: "/home/vscode/.kube/config"
+
+monitoring:
+  endpoint: "http://127.0.0.1:9090"  # 必须提供一个监控服务地址

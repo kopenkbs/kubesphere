@@ -26,7 +26,7 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  //"postCreateCommand": "go version && node --version && npm install -g @qwen-code/qwen-code@latest",
+  "postCreateCommand": "go version && node --version && npm install -g ccman @openai/codex",
 
   // Configure tool-specific properties.
   "customizations" : {

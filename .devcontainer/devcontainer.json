@@ -7,10 +7,7 @@
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
-    "ghcr.io/bullmastiffo/devcontainers-features/azurelinux-docker-outside-of-docker:1": {
-      "installDockerBuildx": true,
-      "installDockerCompose": true
-    },
+    "ghcr.io/cirolosapio/devcontainers-features/alpine-docker-outside-of-docker:0": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
     },

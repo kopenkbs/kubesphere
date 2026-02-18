@@ -2,19 +2,26 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/go
 {
   "name": "kbs",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/go:1-1.23-bookworm",
+  // 基础镜像：Azure Linux Core 3.0
+  "image": "mcr.microsoft.com/azurelinux/base/core:3.0",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
-    "ghcr.io/cirolosapio/devcontainers-features/alpine-docker-outside-of-docker:0": {},
+    // Go Feature，指定版本为 1.23
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.23"
+    },
+    // 专为 Azure Linux 设计的 Docker outside of Docker 支持
+    "ghcr.io/bullmastiffo/devcontainers-features/azurelinux-docker-outside-of-docker:1": {},
+    // Node.js 20
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
     },
+    // kubectl, helm, minikube
     "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
-      "version" : "1.23",
-      "helm" : "3.15.4",
-      "minikube" : "1.25.2"
+      "version": "1.23",
+      "helm": "3.15.4",
+      "minikube": "1.25.2"
     }
   },
 
@@ -22,15 +29,16 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
+  // 验证 Go 和 Node 版本，并安装全局 npm 包
   "postCreateCommand": "go version && node --version && npm install -g ccman @openai/codex",
 
   // Configure tool-specific properties.
-  "customizations" : {
-    "jetbrains" : {
-      "backend" : "GoLand",
-      "version" : "2025.3"
+  "customizations": {
+    "jetbrains": {
+      "backend": "GoLand",
+      "version": "2025.3"
     }
-  },
+  }
 
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"

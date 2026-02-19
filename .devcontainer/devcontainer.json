@@ -4,6 +4,12 @@
   "name": "kbs",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/go:1-1.23-bookworm",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "containerEnv": {
+    "DOCKER_HOST": "unix:///var/run/docker.sock"
+  },
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
@@ -21,7 +27,7 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "go version && node --version && npm install -g ccman @openai/codex",
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
 
   // Configure tool-specific properties.
   "customizations" : {
